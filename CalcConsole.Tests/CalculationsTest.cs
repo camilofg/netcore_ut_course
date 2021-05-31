@@ -73,6 +73,29 @@ namespace CalcConsole.Tests
             Assert.Equal(expextedCollection, calc.FiboNumbers);
         }
 
+        [Fact]
+        public void IsOdd_GivenAnOddNumber_ReturnsTrue() {
+            var calc = _calculationsFixture.calc;
+            Assert.True(calc.IsOdd(35));
+        }
+
+        [Fact]
+        public void IsOdd_GivenAnEvenNumber_ReturnsFalse()
+        {
+            var calc = _calculationsFixture.calc;
+            Assert.False(calc.IsOdd(46));
+        }
+
+        [Theory]
+        [InlineData(1, true)]
+        [InlineData(10, false)]
+        public void IsOdd_TestOddAndEven(int value, bool expected)
+        {
+            var calc = _calculationsFixture.calc;
+            var result = calc.IsOdd(value);
+            Assert.Equal(expected, result);
+        }
+
         public void Dispose()
         {
             memoryStream.Close();
