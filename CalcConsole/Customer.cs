@@ -18,6 +18,11 @@ namespace CalcConsole
         public string Name { get; set; }
         public int Age => 35;
 
+
+        public string GetFullName(string firstName, string lastName) {
+            return $"{firstName} {lastName}";
+        }
+
         public virtual int GetOrdersByName(string name)
         {
             if (string.IsNullOrEmpty(name))

@@ -5,8 +5,14 @@ using Xunit;
 
 namespace CalcConsole.Tests
 {
+    [Collection("Customer")]
     public class CustomerTest
     {
+        private readonly CustomerFixture _customerFixture;
+        public CustomerTest(CustomerFixture customerFixture)
+        {
+            _customerFixture = customerFixture;
+        }
         [Fact]
         public void NameShouldNotBeNull() {
             var customer = new Customer("camilo");
@@ -16,30 +22,26 @@ namespace CalcConsole.Tests
 
         [Fact]
         public void CheckForLegitDiscount() {
-            var customer = new Customer();
-            Assert.InRange(customer.Age, 20, 45);
+            Assert.InRange(_customerFixture.Cust.Age, 20, 45);
         }
 
         [Fact]
         public void CheckNotForLegitDiscount()
         {
-            var customer = new Customer();
-            Assert.NotInRange(customer.Age, 20, 20);
+            Assert.NotInRange(_customerFixture.Cust.Age, 20, 20);
         }
 
         [Fact]
         public void GetOrdersByName_GivenOneName_ShouldReturnValue() {
-            var customer = new Customer();
-            var result = customer.GetOrdersByName("Camilo");
+            var result = _customerFixture.Cust.GetOrdersByName("Camilo");
             Assert.Equal(100, result);
         }
 
         [Fact]
         public void GetOrdersByName_WithoutGivenName_ShouldThrowException()
         {
-            var customer = new Customer();
             //var result = customer.GetOrdersByName("");
-            var exceptionDetails = Assert.Throws<ArgumentException>(() => customer.GetOrdersByName(null));
+            var exceptionDetails = Assert.Throws<ArgumentException>(() => _customerFixture.Cust.GetOrdersByName(null));
             Assert.Equal("param name is empty or null", exceptionDetails.Message);
         }
 
