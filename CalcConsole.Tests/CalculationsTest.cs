@@ -87,8 +87,7 @@ namespace CalcConsole.Tests
         }
 
         [Theory]
-        [InlineData(1, true)]
-        [InlineData(10, false)]
+        [MemberData(nameof(TestDataShare.IsOddOrEvenData), MemberType = typeof(TestDataShare))]
         public void IsOdd_TestOddAndEven(int value, bool expected)
         {
             var calc = _calculationsFixture.calc;
